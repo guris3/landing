@@ -1125,7 +1125,13 @@ html, body { height: 100%; overflow: hidden; }
     transform: none;
   }
 
-  body.historias .modulo-cab { position: sticky; top: 0; z-index: 2; }
+  /* El encabezado queda fijo arriba de la historia, opaco para que no se le cruce el texto. */
+  body.historias .modulo-cab {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--bg-alt);
+  }
 
   /* Barras de avance, una por módulo */
   .barras {
@@ -1156,7 +1162,20 @@ html, body { height: 100%; overflow: hidden; }
 
   .recorrido-datos { min-width: 130px; }
   .modulo::before, .modulo::after { display: none; }
-  .modulo .carrusel > * { flex: 0 0 86%; }
+  /* En el celular no hay carrusel: las tarjetas se apilan y la historia scrollea para abajo. */
+  body.historias .carrusel {
+    flex-direction: column;
+    flex-wrap: nowrap !important;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  body.historias .modulo .carrusel > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  body.historias .carrusel-mandos { display: none; }
   .pistas, .mandos, .pista-uso { display: none; }
   .about-text { text-align: center; }
   .about-tags { justify-content: center; }
