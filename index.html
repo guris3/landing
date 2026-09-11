@@ -3,60 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GURIS3 Solutions — Software y hardware a medida</title>
-<meta name="description" content="Tres ingenieros electrónicos que desarrollan software a medida y soluciones de hardware: aplicaciones web, sistemas de gestión, IA, firmware, RF y IoT.">
-<link rel="icon" type="image/png" href="assets/logo.png">
+<title>GURIS3 Solutions — Software a medida</title>
+<meta name="description" content="Tres ingenieros electrónicos que hacen software a medida para comercios y negocios de servicios: sistemas de gestión, turneros, tiendas online, IA y sitios web.">
+<link rel="icon" type="image/png" href="assets/logo-transparente.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <canvas class="fondo" aria-hidden="true"></canvas>
-<div class="progreso" aria-hidden="true"><span></span></div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#top" class="logo">
-      <img src="assets/logo.png" alt="GURIS3 Solutions">
-      <span>GURIS3 <span class="logo-accent">SOLUTIONS</span></span>
-    </a>
-    <nav>
-      <a href="#servicios">Servicios</a>
-      <a href="#clientes">Clientes</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#como-trabajamos">Cómo trabajamos</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#contacto" class="nav-cta">Contanos tu proyecto</a>
-    </nav>
-  </div>
+<header class="cinta-sup">
+  <a href="#inicio" class="marca-app" data-ir="inicio">
+    <img src="assets/logo-transparente.png" alt="GURIS3 Solutions">
+    <span>GURIS3 <em>SOLUTIONS</em></span>
+  </a>
+  <nav class="chips">
+      <button type="button" data-ir="inicio">GURIS3</button>
+      <button type="button" data-ir="servicios">Qué hacemos</button>
+      <button type="button" data-ir="clientes">Nuestros clientes</button>
+      <button type="button" data-ir="proyectos">Proyectos</button>
+      <button type="button" data-ir="como-trabajamos">Cómo trabajamos</button>
+      <button type="button" data-ir="nosotros">Quiénes somos</button>
+      <button type="button" data-ir="contacto">Contacto</button>
+  </nav>
+  <a class="btn btn-whatsapp btn-chico" href="https://wa.me/5493489480503?text=Hola%2C%20quiero%20contarles%20mi%20proyecto" target="_blank" rel="noopener">WhatsApp</a>
 </header>
 
-<main id="top">
+<div class="tablero" id="tablero">
+  <div class="mundo" id="mundo">
+    <svg class="pistas" id="pistas" aria-hidden="true"></svg>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <span class="hero-badge">Software + Hardware</span>
-        <h1>Ingeniería aplicada a los<br class="br-desktop"> problemas de todos los días.</h1>
-        <p class="hero-sub">Somos tres ingenieros electrónicos. Hacemos software a medida para negocios que necesitan resolver algo concreto: la gestión diaria, los turnos, las ventas y el sitio que trae las consultas.</p>
-        <div class="hero-actions">
-          <a href="mailto:gerooferrari@gmail.com?subject=Quiero%20contarles%20mi%20proyecto" class="btn btn-primary">Contanos tu proyecto</a>
-          <a href="#proyectos" class="btn btn-ghost">Ver lo que hicimos</a>
+    <section class="modulo" id="inicio" style="left:1620px; top:980px; width:620px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>GURIS3</h2>
+        <span class="modulo-ref">U1</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <div class="chip-central">
+          <img src="assets/logo-transparente.png" alt="GURIS3 Solutions">
+          <h1>Ingeniería aplicada a los problemas de todos los días.</h1>
+          <p>Somos tres ingenieros electrónicos. Hacemos software a medida para negocios que necesitan resolver algo concreto: la gestión diaria, los turnos, las ventas y el sitio que trae las consultas.</p>
+          <div class="hero-actions">
+            <a href="#proyectos" class="btn btn-primary" data-ir="proyectos">Ver lo que hicimos</a>
+            <a href="#contacto" class="btn btn-ghost" data-ir="contacto">Contanos tu proyecto</a>
+          </div>
         </div>
       </div>
-      <div class="hero-logo">
-        <img src="assets/logo.png" alt="Logo de GURIS3 Solutions">
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="pulso" aria-hidden="true">
-    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
-      <path d="M0 30 H420 l18 -22 l14 44 l16 -50 l18 58 l14 -30 H1200"/>
-    </svg>
-  </div>
-
-  <section id="servicios" class="section">
-    <h2>Qué hacemos</h2>
+    <section class="modulo" id="servicios" style="left:240px; top:260px; width:900px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Qué hacemos</h2>
+        <span class="modulo-ref">U2</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <h2>Qué hacemos</h2>
     <div class="grid-3">
       <div class="card">
         <span class="icon-badge">
@@ -103,27 +106,26 @@
         </ul>
       </div>
     </div>
-  </section>
+      </div>
+    </section>
 
-  <div class="cinta" aria-hidden="true">
-    <div class="cinta-pista">
-      <div class="cinta-grupo"><span>Python</span><span>FastAPI</span><span>Django</span><span>React</span><span>TypeScript</span><span>PostgreSQL</span><span>Docker</span><span>MQTT</span><span>GNU Radio</span><span>Linux</span><span>SQLite</span><span>Visión por computadora</span><span>Vite</span><span>REST</span><span>Pandas</span></div>
-      <div class="cinta-grupo"><span>Python</span><span>FastAPI</span><span>Django</span><span>React</span><span>TypeScript</span><span>PostgreSQL</span><span>Docker</span><span>MQTT</span><span>GNU Radio</span><span>Linux</span><span>SQLite</span><span>Visión por computadora</span><span>Vite</span><span>REST</span><span>Pandas</span></div>
-    </div>
-  </div>
-
-  <section id="clientes" class="section">
-    <h2>Nuestros clientes</h2>
-    <p class="section-lead">Negocios reales que usan lo que hicimos todos los días, desde el mostrador hasta el panel de facturación.</p>
-
+    <section class="modulo" id="clientes" style="left:2560px; top:200px; width:860px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Nuestros clientes</h2>
+        <span class="modulo-ref">U3</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <h2>Nuestros clientes</h2>
+        <p class="section-lead">Negocios reales que usan lo que hicimos todos los días, desde el mostrador hasta el panel de facturación.</p>
     <div class="counters">
-      <div class="counter"><strong data-count="4">4</strong><span>clientes activos</span></div>
-      <div class="counter"><strong data-count="6">6</strong><span>sistemas en producción</span></div>
-      <div class="counter"><strong data-count="1" data-prefix="+">+1</strong><span>año en producción</span></div>
-      <div class="counter"><strong data-count="3">3</strong><span>ingenieros detrás</span></div>
-    </div>
+          <div class="counter"><strong data-count="4">4</strong><span>clientes activos</span></div>
+          <div class="counter"><strong data-count="6">6</strong><span>sistemas en producción</span></div>
+          <div class="counter"><strong data-count="1" data-prefix="+">+1</strong><span>año en producción</span></div>
+          <div class="counter"><strong data-count="3">3</strong><span>ingenieros detrás</span></div>
+        </div>
 
-    <div class="projects">
+        <div class="projects">
       <article class="project">
         <span class="project-tag">Óptica</span>
         <h3 class="client-logo"><img src="assets/clientes/optica-imago.png" alt="Óptica Imago"></h3>
@@ -160,10 +162,17 @@
         <p>Control de stock y caja para comercios chicos, con carga rápida de productos y actualización masiva de precios.</p>
       </article>
     </div>
-  </section>
+      </div>
+    </section>
 
-  <section id="proyectos" class="section section-alt">
-    <h2>Proyectos</h2>
+    <section class="modulo" id="proyectos" style="left:2420px; top:1320px; width:960px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Proyectos</h2>
+        <span class="modulo-ref">U5</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <h2>Proyectos</h2>
     <div class="buscador">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg>
       <input type="search" id="buscar" placeholder="Buscá lo que necesitás: turnos, stock, landing, IA…" aria-label="Buscar entre lo que hicimos">
@@ -260,10 +269,17 @@
         <div class="stack"><span>FastAPI</span><span>React</span><span>TypeScript</span><span>Gráficos</span></div>
       </article>
     </div>
-  </section>
+      </div>
+    </section>
 
-  <section id="como-trabajamos" class="section">
-    <h2>Cómo trabajamos</h2>
+    <section class="modulo" id="como-trabajamos" style="left:1500px; top:2320px; width:860px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Cómo trabajamos</h2>
+        <span class="modulo-ref">U6</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <h2>Cómo trabajamos</h2>
     <div class="steps">
       <div class="step">
         <span class="step-n">1</span>
@@ -286,9 +302,16 @@
         <p>Puesta en producción, documentación y mantenimiento. Te responde directamente quien lo programó.</p>
       </div>
     </div>
-  </section>
+      </div>
+    </section>
 
-  <section id="nosotros" class="section section-alt about">
+    <section class="modulo" id="nosotros" style="left:180px; top:2560px; width:640px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Quiénes somos</h2>
+        <span class="modulo-ref">U7</span>
+      </header>
+      <div class="modulo-cuerpo">
     <div class="about-text">
       <h2>Quiénes somos</h2>
       <p>Somos tres ingenieros electrónicos y hacemos software. Trabajamos con comercios, consultorios y negocios de servicios: sistemas de gestión, turneros, tiendas online y sitios web.</p>
@@ -306,135 +329,333 @@
         <span>IA aplicada</span>
       </div>
     </div>
-  </section>
+      </div>
+    </section>
 
-  <section id="contacto" class="section contact">
-    <h2>Contanos qué necesitás</h2>
+    <section class="modulo" id="contacto" style="left:3560px; top:820px; width:540px">
+      <header class="modulo-cab">
+        <span class="modulo-led" aria-hidden="true"></span>
+        <h2>Contacto</h2>
+        <span class="modulo-ref">U8</span>
+      </header>
+      <div class="modulo-cuerpo">
+        <h2>Contanos qué necesitás</h2>
     <p class="section-lead">Sea una idea en una servilleta o un sistema viejo que ya no da más, escribinos y lo vemos juntos.</p>
     <div class="contact-actions">
       <a href="mailto:gerooferrari@gmail.com?subject=Quiero%20contarles%20mi%20proyecto" class="btn btn-primary btn-big">Escribinos por mail</a>
       <a href="https://wa.me/5493489480503?text=Hola%2C%20quiero%20contarles%20mi%20proyecto" target="_blank" rel="noopener" class="btn btn-whatsapp btn-big">Escribinos por WhatsApp</a>
     </div>
     <p class="contact-note">Te respondemos directamente. Sin formularios ni intermediarios.</p>
-  </section>
+      </div>
+    </section>
 
-</main>
+  </div>
+</div>
 
-<footer class="footer">
-  <span>GURIS3 Solutions — Software y hardware a medida</span>
-  <span>Buenos Aires, Argentina</span>
-</footer>
+<div class="mandos" aria-hidden="false">
+  <button type="button" id="alejar" aria-label="Alejar">−</button>
+  <button type="button" id="centrar" aria-label="Centrar">⌾</button>
+  <button type="button" id="acercar" aria-label="Acercar">+</button>
+</div>
+
+<div class="recorrido">
+  <button type="button" id="anterior" aria-label="Módulo anterior">←</button>
+  <div class="recorrido-datos">
+    <strong id="paso-nombre">GURIS3</strong>
+    <span id="paso-num">1 / 8</span>
+  </div>
+  <button type="button" id="siguiente" aria-label="Módulo siguiente">→</button>
+</div>
+
+<p class="pista-uso" id="pista-uso">Usá la rueda del mouse o las flechas para recorrer la placa</p>
 
 <script>
-var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var chico = matchMedia('(max-width: 900px)');
+var tablero = document.getElementById('tablero');
+var mundo = document.getElementById('mundo');
+var pistas = document.getElementById('pistas');
+var modulos = [].slice.call(document.querySelectorAll('.modulo'));
 
-// Aparición al hacer scroll, con escalonado dentro de cada grupo.
-var previos = {};
-document.querySelectorAll('.hero-text > *, .section > h2, .section-lead, .card, .project, .counter, .step, .about-text p, .about-tags, .contact-actions, .section-note').forEach(function (el) {
-  var padre = el.parentNode;
-  var i = previos.p === padre ? ++previos.n : (previos = { p: padre, n: 0 }).n;
-  el.classList.add('reveal');
-  el.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
-});
+// ---- Pistas: caminos en ángulo recto entre los módulos ----
+var ENLACES = [["inicio", "servicios"], ["inicio", "clientes"], ["inicio", "proyectos"], ["inicio", "como-trabajamos"], ["inicio", "nosotros"], ["inicio", "contacto"], ["servicios", "nosotros"], ["clientes", "proyectos"], ["proyectos", "contacto"]];
 
-if (quieto) {
-  document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
-} else {
-  var verse = new IntersectionObserver(function (entradas) {
-    entradas.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('visible');
-      verse.unobserve(e.target);
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px' });
-  document.querySelectorAll('.reveal').forEach(function (el) { verse.observe(el); });
+function anclas(a, b) {
+  var ca = { x: a.offsetLeft + a.offsetWidth / 2, y: a.offsetTop + a.offsetHeight / 2 };
+  var cb = { x: b.offsetLeft + b.offsetWidth / 2, y: b.offsetTop + b.offsetHeight / 2 };
+  var medio = (ca.x + cb.x) / 2;
+  return 'M' + ca.x + ' ' + ca.y + ' H' + medio + ' V' + cb.y + ' H' + cb.x;
 }
 
-var nav = document.querySelector('.nav');
+function dibujarPistas() {
+  var ancho = 0, alto = 0;
+  modulos.forEach(function (m) {
+    ancho = Math.max(ancho, m.offsetLeft + m.offsetWidth);
+    alto = Math.max(alto, m.offsetTop + m.offsetHeight);
+  });
+  mundo.style.width = (ancho + 300) + 'px';
+  mundo.style.height = (alto + 300) + 'px';
+  pistas.setAttribute('viewBox', '0 0 ' + (ancho + 300) + ' ' + (alto + 300));
 
-// Cuenta hasta el número final cuando la sección entra en pantalla.
-document.querySelectorAll('.counter strong').forEach(function (el) {
-  var target = +el.dataset.count, prefix = el.dataset.prefix || '';
-  if (quieto) return;
-  el.textContent = prefix + '0';
-  new IntersectionObserver(function (entries, obs) {
-    if (!entries[0].isIntersecting) return;
-    obs.disconnect();
-    var n = 0, step = Math.max(1, Math.round(target / 40));
-    var id = setInterval(function () {
-      n = Math.min(target, n + step);
-      el.textContent = prefix + n;
-      if (n === target) clearInterval(id);
-    }, 40);
-  }, { threshold: 0.4 }).observe(el);
+  pistas.innerHTML = ENLACES.map(function (par) {
+    var a = document.getElementById(par[0]), b = document.getElementById(par[1]);
+    if (!a || !b) return '';
+    var d = anclas(a, b);
+    return '<path class="pista" d="' + d + '"/><path class="pista-viva" d="' + d + '"/>';
+  }).join('');
+
+  // Islas de soldadura donde nace cada pista.
+  modulos.forEach(function (m) {
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('class', 'isla');
+    c.setAttribute('cx', m.offsetLeft + m.offsetWidth / 2);
+    c.setAttribute('cy', m.offsetTop + m.offsetHeight / 2);
+    c.setAttribute('r', 7);
+    pistas.appendChild(c);
+  });
+}
+
+// ---- Recorrer la placa: arrastrar, rueda y botones ----
+var vista = { x: 0, y: 0, k: 0.8 };
+var meta = null;
+
+function aplicar() {
+  mundo.style.transform = 'translate(' + vista.x.toFixed(1) + 'px,' + vista.y.toFixed(1) + 'px) scale(' + vista.k.toFixed(3) + ')';
+}
+
+function limitar(k) { return Math.max(0.3, Math.min(1.6, k)); }
+
+function centrarEn(id, k) {
+  var m = document.getElementById(id);
+  if (!m || chico.matches) {
+    if (m && chico.matches) m.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  // El módulo siempre entra entero en pantalla: se elige la escala que lo hace caber.
+  var destino = k || Math.min(1,
+    (tablero.clientWidth - 110) / m.offsetWidth,
+    (tablero.clientHeight - 130) / m.offsetHeight);
+  meta = {
+    k: destino,
+    x: tablero.clientWidth / 2 - (m.offsetLeft + m.offsetWidth / 2) * destino,
+    y: tablero.clientHeight / 2 - (m.offsetTop + m.offsetHeight / 2) * destino
+  };
+  modulos.forEach(function (o) { o.classList.toggle('activo', o === m); });
+  if (id === 'clientes') contar();
+  requestAnimationFrame(viajar);
+}
+
+function viajar() {
+  if (!meta) return;
+  var listo = true;
+  ['x', 'y', 'k'].forEach(function (p) {
+    var d = meta[p] - vista[p];
+    if (Math.abs(d) > (p === 'k' ? 0.002 : 0.5)) { listo = false; vista[p] += d * 0.14; }
+    else vista[p] = meta[p];
+  });
+  aplicar();
+  if (!listo) requestAnimationFrame(viajar);
+  else meta = null;
+}
+
+var arrastrando = false, ox = 0, oy = 0;
+
+tablero.addEventListener('pointerdown', function (e) {
+  if (e.target.closest('a, button, input')) return;
+  arrastrando = true;
+  meta = null;
+  ox = e.clientX - vista.x;
+  oy = e.clientY - vista.y;
+  tablero.setPointerCapture(e.pointerId);
+  tablero.classList.add('agarrando');
 });
 
-// ---- Efectos atados al scroll ----
-var barra = document.querySelector('.progreso span');
-var heroTexto = document.querySelector('.hero-text');
-var heroLogo = document.querySelector('.hero-logo img');
-var enlaces = [].slice.call(document.querySelectorAll('.nav nav a[href^="#"]:not(.nav-cta)'));
-var secciones = enlaces.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-var pendiente = false;
+tablero.addEventListener('pointermove', function (e) {
+  if (!arrastrando) return;
+  vista.x = e.clientX - ox;
+  vista.y = e.clientY - oy;
+  aplicar();
+});
 
-function alScrollear() {
-  var alto = document.documentElement.scrollHeight - innerHeight;
-  var avance = alto > 0 ? Math.min(1, scrollY / alto) : 0;
+['pointerup', 'pointercancel'].forEach(function (ev) {
+  tablero.addEventListener(ev, function () {
+    arrastrando = false;
+    tablero.classList.remove('agarrando');
+  });
+});
 
-  barra.style.transform = 'scaleX(' + avance + ')';
+// ---- Recorrido: la rueda, las flechas y los botones llevan de un módulo al siguiente ----
+var RECORRIDO = ['inicio', 'servicios', 'proyectos', 'clientes', 'como-trabajamos', 'nosotros', 'contacto'];
+var paso = 0;
+var enfriando = false;
 
-  document.documentElement.style.setProperty('--scroll', avance.toFixed(4));
-  nav.classList.toggle('scrolled', scrollY > 40);
+function irAPaso(i) {
+  paso = Math.max(0, Math.min(RECORRIDO.length - 1, i));
+  centrarEn(RECORRIDO[paso]);
+  marcarPaso();
+}
 
-  if (!quieto) {
-    // El hero se aleja y se desvanece mientras baja la página.
-    var p = Math.min(1, scrollY / innerHeight);
-    heroTexto.style.transform = 'translateY(' + (p * 60) + 'px)';
-    heroTexto.style.opacity = 1 - p * 0.9;
-    heroLogo.style.translate = '0 ' + (p * -90) + 'px';
-    heroLogo.style.scale = 1 - p * 0.12;
+function marcarPaso() {
+  var id = RECORRIDO[paso];
+  document.querySelectorAll('.chips button').forEach(function (b) {
+    b.classList.toggle('activo', b.dataset.ir === id);
+  });
+  var chip = document.querySelector('.chips button[data-ir="' + id + '"]');
+  if (chip) {
+    chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    document.getElementById('paso-nombre').textContent = chip.textContent;
+  }
+  document.getElementById('paso-num').textContent = (paso + 1) + ' / ' + RECORRIDO.length;
+  document.getElementById('anterior').disabled = paso === 0;
+  document.getElementById('siguiente').disabled = paso === RECORRIDO.length - 1;
+}
+
+function rodar(delta) {
+  if (enfriando) return;
+  enfriando = true;
+  setTimeout(function () { enfriando = false; }, 650);
+  irAPaso(paso + (delta > 0 ? 1 : -1));
+}
+
+tablero.addEventListener('wheel', function (e) {
+  if (chico.matches) return;
+  e.preventDefault();
+  rodar(e.deltaY);
+}, { passive: false });
+
+addEventListener('keydown', function (e) {
+  if (chico.matches || e.target.matches('input')) return;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); irAPaso(paso + 1); }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); irAPaso(paso - 1); }
+});
+
+document.getElementById('siguiente').addEventListener('click', function () { irAPaso(paso + 1); });
+document.getElementById('anterior').addEventListener('click', function () { irAPaso(paso - 1); });
+
+
+// El zoom de los botones mantiene quieto el centro de la pantalla.
+function zoomEn(cx, cy, nuevo) {
+  meta = null;
+  var antes = vista.k;
+  vista.k = limitar(nuevo);
+  vista.x = cx - (cx - vista.x) * (vista.k / antes);
+  vista.y = cy - (cy - vista.y) * (vista.k / antes);
+  aplicar();
+}
+
+document.getElementById('acercar').addEventListener('click', function () {
+  zoomEn(tablero.clientWidth / 2, tablero.clientHeight / 2, vista.k * 1.25);
+});
+
+document.getElementById('alejar').addEventListener('click', function () {
+  zoomEn(tablero.clientWidth / 2, tablero.clientHeight / 2, vista.k / 1.25);
+});
+
+// Vista general: toda la placa entra en pantalla.
+function verTodo() {
+  if (chico.matches) return;
+  var ancho = parseFloat(mundo.style.width), alto = parseFloat(mundo.style.height);
+  var k = limitar(Math.min((tablero.clientWidth - 60) / ancho, (tablero.clientHeight - 60) / alto));
+  meta = {
+    k: k,
+    x: (tablero.clientWidth - ancho * k) / 2,
+    y: (tablero.clientHeight - alto * k) / 2
+  };
+  modulos.forEach(function (o) { o.classList.remove('activo'); });
+  document.querySelectorAll('.chips button').forEach(function (b) { b.classList.remove('activo'); });
+  requestAnimationFrame(viajar);
+}
+
+document.getElementById('centrar').addEventListener('click', verTodo);
+
+document.querySelectorAll('[data-ir]').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    var i = RECORRIDO.indexOf(el.dataset.ir);
+    if (i >= 0) irAPaso(i);
+    else centrarEn(el.dataset.ir);
+  });
+});
+
+addEventListener('resize', function () { dibujarPistas(); });
+
+dibujarPistas();
+if (!chico.matches) irAPaso(0);
+marcarPaso();
+aplicar();
+
+// La ayuda de uso se va sola en cuanto tocás la placa.
+var pistaUso = document.getElementById('pista-uso');
+['pointerdown', 'wheel'].forEach(function (ev) {
+  addEventListener(ev, function () { pistaUso.classList.add('ida'); }, { once: true });
+});
+
+// ---- Lo que no entra en pantalla se recorre de a páginas ----
+document.querySelectorAll('.modulo .grid-3, .modulo .projects').forEach(function (grilla) {
+  if (grilla.children.length < 4) return;
+  grilla.classList.add('carrusel');
+
+  var flechas = document.createElement('div');
+  flechas.className = 'carrusel-mandos';
+  flechas.innerHTML = '<button type="button" aria-label="Anterior">←</button><span></span><button type="button" aria-label="Siguiente">→</button>';
+  grilla.parentNode.insertBefore(flechas, grilla.nextSibling);
+
+  var atras = flechas.children[0], marca = flechas.children[1], adelante = flechas.children[2];
+
+  function paginas() {
+    return Math.max(1, Math.ceil(grilla.scrollWidth / grilla.clientWidth - 0.02));
   }
 
-  // Marca en el menú la sección que se está mirando.
-  var activa = -1;
-  secciones.forEach(function (sec, i) {
-    if (sec && sec.getBoundingClientRect().top <= innerHeight * 0.35) activa = i;
-  });
-  enlaces.forEach(function (a, i) { a.classList.toggle('activo', i === activa); });
+  // La última página suele ser parcial, así que se mide sobre el recorrido total.
+  function actual() {
+    var tope = grilla.scrollWidth - grilla.clientWidth;
+    return tope <= 1 ? 1 : 1 + Math.round((grilla.scrollLeft / tope) * (paginas() - 1));
+  }
 
-  pendiente = false;
-}
+  function refrescar() {
+    marca.textContent = actual() + ' / ' + paginas();
+    atras.disabled = grilla.scrollLeft < 8;
+    adelante.disabled = grilla.scrollLeft + grilla.clientWidth >= grilla.scrollWidth - 8;
+  }
 
-addEventListener('scroll', function () {
-  if (pendiente) return;
-  pendiente = true;
-  requestAnimationFrame(alScrollear);
-}, { passive: true });
+  function mover(dir) {
+    grilla.scrollBy({ left: dir * grilla.clientWidth, behavior: 'smooth' });
+    setTimeout(refrescar, 450);
+  }
 
-alScrollear();
-
-// ---- El foco de luz sigue al mouse dentro de las tarjetas ----
-document.querySelectorAll('.card, .project').forEach(function (el) {
-  el.addEventListener('pointermove', function (e) {
-    var r = el.getBoundingClientRect();
-    var x = e.clientX - r.left, y = e.clientY - r.top;
-    el.style.setProperty('--mx', x + 'px');
-    el.style.setProperty('--my', y + 'px');
-    if (quieto) return;
-    // La tarjeta se inclina hacia donde está el cursor, como una ficha sobre la mesa.
-    el.style.setProperty('--girox', ((y / r.height - 0.5) * -8).toFixed(2) + 'deg');
-    el.style.setProperty('--giroy', ((x / r.width - 0.5) * 8).toFixed(2) + 'deg');
-  });
-  el.addEventListener('pointerleave', function () {
-    el.style.setProperty('--girox', '0deg');
-    el.style.setProperty('--giroy', '0deg');
-  });
+  atras.addEventListener('click', function () { mover(-1); });
+  adelante.addEventListener('click', function () { mover(1); });
+  grilla.addEventListener('scroll', refrescar, { passive: true });
+  refrescar();
 });
+
+// ---- Los contadores cuentan cuando su módulo entra en foco ----
+var contados = false;
+
+function contar() {
+  if (contados) return;
+  contados = true;
+  document.querySelectorAll('.counter strong').forEach(function (el) {
+    var target = +el.dataset.count, prefijo = el.dataset.prefix || '';
+    if (quieto) return;
+    var n = 0, salto = Math.max(1, Math.round(target / 30));
+    el.textContent = prefijo + '0';
+    var id = setInterval(function () {
+      n = Math.min(target, n + salto);
+      el.textContent = prefijo + n;
+      if (n === target) clearInterval(id);
+    }, 45);
+  });
+}
 
 // ---- Buscador de proyectos, todo del lado del navegador ----
 var campo = document.getElementById('buscar');
 var tarjetas = [].slice.call(document.querySelectorAll('.project[data-claves]'));
 var aviso = document.querySelector('.sin-resultados');
+
+function limpiar(t) {
+  return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
 
 // Busca el término al comienzo de alguna palabra, para que "ia" no entre en "inmobiliaria".
 function arranca(texto, termino) {
@@ -446,11 +667,6 @@ function arranca(texto, termino) {
   return false;
 }
 
-function limpiar(t) {
-  return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-}
-
-// Título, descripción, etiquetas y sinónimos, todo en una sola bolsa de texto.
 tarjetas.forEach(function (el) {
   el.dataset.texto = limpiar(el.textContent + ' ' + el.dataset.claves);
 });
@@ -464,6 +680,23 @@ campo.addEventListener('input', function () {
     if (entra) encontradas++;
   });
   aviso.hidden = encontradas > 0;
+});
+
+// ---- Foco e inclinación de las tarjetas ----
+document.querySelectorAll('.card, .project').forEach(function (el) {
+  el.addEventListener('pointermove', function (e) {
+    var r = el.getBoundingClientRect();
+    var x = e.clientX - r.left, y = e.clientY - r.top;
+    el.style.setProperty('--mx', x + 'px');
+    el.style.setProperty('--my', y + 'px');
+    if (quieto) return;
+    el.style.setProperty('--girox', ((y / r.height - 0.5) * -8).toFixed(2) + 'deg');
+    el.style.setProperty('--giroy', ((x / r.width - 0.5) * 8).toFixed(2) + 'deg');
+  });
+  el.addEventListener('pointerleave', function () {
+    el.style.setProperty('--girox', '0deg');
+    el.style.setProperty('--giroy', '0deg');
+  });
 });
 
 // ---- Puntero propio: un punto que sigue exacto y un anillo que llega tarde ----
@@ -481,6 +714,7 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
     px = e.clientX;
     py = e.clientY;
     punto.style.transform = 'translate(' + px + 'px,' + py + 'px) translate(-50%,-50%)';
+    document.body.classList.add('mouse-vivo');
   });
 
   (function seguir() {
@@ -490,20 +724,19 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
     requestAnimationFrame(seguir);
   })();
 
-  // Sobre cosas clickeables el anillo se agranda.
   document.querySelectorAll('a, button, input, .card, .project, .counter').forEach(function (el) {
     el.addEventListener('pointerenter', function () { anillo.classList.add('grande'); });
     el.addEventListener('pointerleave', function () { anillo.classList.remove('grande'); });
   });
 }
 
-// ---- Red de puntos en el fondo, reacciona al scroll ----
+
+// ---- Red de puntos en el fondo ----
 (function () {
   var lienzo = document.querySelector('.fondo');
   if (!lienzo || quieto) return;
   var ctx = lienzo.getContext('2d');
-  var puntos = [];
-  var ancho, alto;
+  var puntos = [], ancho, alto;
   // ponytail: 70 puntos y comparación de a pares; si hiciera falta más densidad, hay que dividir la pantalla en celdas.
   var CANTIDAD = 70, CERCA = 130;
 
@@ -524,7 +757,7 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
     });
   }
 
-  // Los tres colores de la marca: el fondo va virando del azul al rosa según cuánto bajaste.
+  // Los tres colores de la marca: el fondo vira según cuánto bajaste en la vista.
   var paleta = [[46, 139, 255], [47, 227, 194], [255, 111, 174]];
 
   function mezclar(avance) {
@@ -534,17 +767,15 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
     return paleta[i].map(function (c, j) { return Math.round(c + (paleta[i + 1][j] - c) * f); });
   }
 
-  var scrollPrevio = 0;
+  var previo = 0;
 
   (function pintar() {
-    var avance = +getComputedStyle(document.documentElement).getPropertyValue('--scroll') || 0;
-    // Mientras se scrollea, los puntos se arrastran hacia arriba.
-    var arrastre = Math.max(-6, Math.min(6, (scrollY - scrollPrevio) * 0.08));
-    scrollPrevio = scrollY;
+    var avance = paso / (RECORRIDO.length - 1);
+    var arrastre = Math.max(-6, Math.min(6, (vista.y - previo) * -0.05));
+    previo = vista.y;
 
     var c = mezclar(Math.min(1, avance));
     var rgb = c[0] + ',' + c[1] + ',' + c[2];
-
     ctx.clearRect(0, 0, ancho, alto);
 
     puntos.forEach(function (p) {
@@ -580,6 +811,3 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
   })();
 })();
 </script>
-
-</body>
-</html>
