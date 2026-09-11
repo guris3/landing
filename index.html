@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<canvas class="fondo" aria-hidden="true"></canvas>
 <div class="progreso" aria-hidden="true"><span></span></div>
 
 <header class="nav">
@@ -381,6 +382,7 @@ function alScrollear() {
   var avance = alto > 0 ? Math.min(1, scrollY / alto) : 0;
 
   barra.style.transform = 'scaleX(' + avance + ')';
+
   document.documentElement.style.setProperty('--scroll', avance.toFixed(4));
   nav.classList.toggle('scrolled', scrollY > 40);
 
@@ -415,8 +417,17 @@ alScrollear();
 document.querySelectorAll('.card, .project').forEach(function (el) {
   el.addEventListener('pointermove', function (e) {
     var r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    var x = e.clientX - r.left, y = e.clientY - r.top;
+    el.style.setProperty('--mx', x + 'px');
+    el.style.setProperty('--my', y + 'px');
+    if (quieto) return;
+    // La tarjeta se inclina hacia donde está el cursor, como una ficha sobre la mesa.
+    el.style.setProperty('--girox', ((y / r.height - 0.5) * -8).toFixed(2) + 'deg');
+    el.style.setProperty('--giroy', ((x / r.width - 0.5) * 8).toFixed(2) + 'deg');
+  });
+  el.addEventListener('pointerleave', function () {
+    el.style.setProperty('--girox', '0deg');
+    el.style.setProperty('--giroy', '0deg');
   });
 });
 
@@ -454,6 +465,120 @@ campo.addEventListener('input', function () {
   });
   aviso.hidden = encontradas > 0;
 });
+
+// ---- Puntero propio: un punto que sigue exacto y un anillo que llega tarde ----
+if (matchMedia('(hover: hover) and (pointer: fine)').matches && !quieto) {
+  document.body.classList.add('con-puntero');
+  var punto = document.createElement('div');
+  var anillo = document.createElement('div');
+  punto.className = 'cursor-punto';
+  anillo.className = 'cursor-anillo';
+  document.body.appendChild(punto);
+  document.body.appendChild(anillo);
+
+  var px = innerWidth / 2, py = innerHeight / 2, ax = px, ay = py;
+  addEventListener('pointermove', function (e) {
+    px = e.clientX;
+    py = e.clientY;
+    punto.style.transform = 'translate(' + px + 'px,' + py + 'px) translate(-50%,-50%)';
+  });
+
+  (function seguir() {
+    ax += (px - ax) * 0.16;
+    ay += (py - ay) * 0.16;
+    anillo.style.transform = 'translate(' + ax.toFixed(1) + 'px,' + ay.toFixed(1) + 'px) translate(-50%,-50%)';
+    requestAnimationFrame(seguir);
+  })();
+
+  // Sobre cosas clickeables el anillo se agranda.
+  document.querySelectorAll('a, button, input, .card, .project, .counter').forEach(function (el) {
+    el.addEventListener('pointerenter', function () { anillo.classList.add('grande'); });
+    el.addEventListener('pointerleave', function () { anillo.classList.remove('grande'); });
+  });
+}
+
+// ---- Red de puntos en el fondo, reacciona al scroll ----
+(function () {
+  var lienzo = document.querySelector('.fondo');
+  if (!lienzo || quieto) return;
+  var ctx = lienzo.getContext('2d');
+  var puntos = [];
+  var ancho, alto;
+  // ponytail: 70 puntos y comparación de a pares; si hiciera falta más densidad, hay que dividir la pantalla en celdas.
+  var CANTIDAD = 70, CERCA = 130;
+
+  function medir() {
+    ancho = lienzo.width = innerWidth;
+    alto = lienzo.height = innerHeight;
+  }
+
+  medir();
+  addEventListener('resize', medir);
+
+  for (var i = 0; i < CANTIDAD; i++) {
+    puntos.push({
+      x: Math.random() * ancho,
+      y: Math.random() * alto,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25
+    });
+  }
+
+  // Los tres colores de la marca: el fondo va virando del azul al rosa según cuánto bajaste.
+  var paleta = [[46, 139, 255], [47, 227, 194], [255, 111, 174]];
+
+  function mezclar(avance) {
+    var t = avance * (paleta.length - 1);
+    var i = Math.min(paleta.length - 2, Math.floor(t));
+    var f = t - i;
+    return paleta[i].map(function (c, j) { return Math.round(c + (paleta[i + 1][j] - c) * f); });
+  }
+
+  var scrollPrevio = 0;
+
+  (function pintar() {
+    var avance = +getComputedStyle(document.documentElement).getPropertyValue('--scroll') || 0;
+    // Mientras se scrollea, los puntos se arrastran hacia arriba.
+    var arrastre = Math.max(-6, Math.min(6, (scrollY - scrollPrevio) * 0.08));
+    scrollPrevio = scrollY;
+
+    var c = mezclar(Math.min(1, avance));
+    var rgb = c[0] + ',' + c[1] + ',' + c[2];
+
+    ctx.clearRect(0, 0, ancho, alto);
+
+    puntos.forEach(function (p) {
+      p.x += p.vx;
+      p.y += p.vy - arrastre;
+      if (p.x < 0) p.x += ancho;
+      if (p.x > ancho) p.x -= ancho;
+      if (p.y < 0) p.y += alto;
+      if (p.y > alto) p.y -= alto;
+    });
+
+    for (var i = 0; i < puntos.length; i++) {
+      var a = puntos[i];
+      ctx.fillStyle = 'rgba(' + rgb + ',0.55)';
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, 1.6, 0, 6.2832);
+      ctx.fill();
+
+      for (var j = i + 1; j < puntos.length; j++) {
+        var b = puntos[j];
+        var dx = a.x - b.x, dy = a.y - b.y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d > CERCA) continue;
+        ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.16 * (1 - d / CERCA)).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(pintar);
+  })();
+})();
 </script>
 
 </body>
