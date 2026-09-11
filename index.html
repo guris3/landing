@@ -461,7 +461,7 @@ function viajar() {
 var arrastrando = false, ox = 0, oy = 0;
 
 tablero.addEventListener('pointerdown', function (e) {
-  if (e.target.closest('a, button, input')) return;
+  if (chico.matches || e.target.closest('a, button, input')) return;
   arrastrando = true;
   meta = null;
   ox = e.clientX - vista.x;
@@ -590,6 +590,41 @@ var pistaUso = document.getElementById('pista-uso');
   addEventListener(ev, function () { pistaUso.classList.add('ida'); }, { once: true });
 });
 
+// ---- En celular: riel de puntos y módulo a pantalla completa ----
+(function () {
+  if (!chico.matches) return;
+  var riel = document.createElement('nav');
+  riel.className = 'riel';
+  riel.setAttribute('aria-label', 'Secciones');
+  modulos.forEach(function (m) {
+    var p = document.createElement('button');
+    p.type = 'button';
+    p.dataset.ir = m.id;
+    p.setAttribute('aria-label', m.querySelector('h2').textContent);
+    p.addEventListener('click', function () {
+      m.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    riel.appendChild(p);
+  });
+  document.body.appendChild(riel);
+
+  var puntos = [].slice.call(riel.children);
+  var mirando = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      puntos.forEach(function (p) { p.classList.toggle('activo', p.dataset.ir === e.target.id); });
+      var chip = document.querySelector('.chips button[data-ir="' + e.target.id + '"]');
+      if (chip) {
+        document.querySelectorAll('.chips button').forEach(function (b) { b.classList.remove('activo'); });
+        chip.classList.add('activo');
+        chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  modulos.forEach(function (m) { mirando.observe(m); });
+})();
+
 // ---- Lo que no entra en pantalla se recorre de a páginas ----
 document.querySelectorAll('.modulo .grid-3, .modulo .projects').forEach(function (grilla) {
   if (grilla.children.length < 4) return;
@@ -602,14 +637,23 @@ document.querySelectorAll('.modulo .grid-3, .modulo .projects').forEach(function
 
   var atras = flechas.children[0], marca = flechas.children[1], adelante = flechas.children[2];
 
-  function paginas() {
-    return Math.max(1, Math.ceil(grilla.scrollWidth / grilla.clientWidth - 0.02));
+  // El paso es el ancho de una tarjeta más la separación, así nunca queda a mitad de camino.
+  function salto() {
+    var uno = grilla.children[0];
+    if (!uno) return grilla.clientWidth;
+    return uno.offsetWidth + parseFloat(getComputedStyle(grilla).columnGap || 0);
   }
 
-  // La última página suele ser parcial, así que se mide sobre el recorrido total.
+  function porPagina() {
+    return Math.max(1, Math.round(grilla.clientWidth / salto()));
+  }
+
+  function paginas() {
+    return Math.max(1, Math.ceil(grilla.children.length / porPagina()));
+  }
+
   function actual() {
-    var tope = grilla.scrollWidth - grilla.clientWidth;
-    return tope <= 1 ? 1 : 1 + Math.round((grilla.scrollLeft / tope) * (paginas() - 1));
+    return Math.min(paginas(), Math.round(grilla.scrollLeft / (salto() * porPagina())) + 1);
   }
 
   function refrescar() {
@@ -619,7 +663,7 @@ document.querySelectorAll('.modulo .grid-3, .modulo .projects').forEach(function
   }
 
   function mover(dir) {
-    grilla.scrollBy({ left: dir * grilla.clientWidth, behavior: 'smooth' });
+    grilla.scrollBy({ left: dir * salto() * porPagina(), behavior: 'smooth' });
     setTimeout(refrescar, 450);
   }
 
