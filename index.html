@@ -491,7 +491,8 @@ var enfriando = false;
 
 function irAPaso(i) {
   paso = Math.max(0, Math.min(RECORRIDO.length - 1, i));
-  centrarEn(RECORRIDO[paso]);
+  if (chico.matches && window.mostrarHistoria) mostrarHistoria(paso);
+  else centrarEn(RECORRIDO[paso]);
   marcarPaso();
 }
 
@@ -580,8 +581,7 @@ document.querySelectorAll('[data-ir]').forEach(function (el) {
 addEventListener('resize', function () { dibujarPistas(); });
 
 dibujarPistas();
-if (!chico.matches) irAPaso(0);
-marcarPaso();
+irAPaso(0);
 aplicar();
 
 // La ayuda de uso se va sola en cuanto tocás la placa.
@@ -590,39 +590,51 @@ var pistaUso = document.getElementById('pista-uso');
   addEventListener(ev, function () { pistaUso.classList.add('ida'); }, { once: true });
 });
 
-// ---- En celular: riel de puntos y módulo a pantalla completa ----
+// ---- En celular: una historia por módulo, se pasa con el dedo ----
 (function () {
   if (!chico.matches) return;
-  var riel = document.createElement('nav');
-  riel.className = 'riel';
-  riel.setAttribute('aria-label', 'Secciones');
-  modulos.forEach(function (m) {
-    var p = document.createElement('button');
-    p.type = 'button';
-    p.dataset.ir = m.id;
-    p.setAttribute('aria-label', m.querySelector('h2').textContent);
-    p.addEventListener('click', function () {
-      m.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.body.classList.add('historias');
+
+  var barras = document.createElement('div');
+  barras.className = 'barras';
+  modulos.forEach(function () { barras.appendChild(document.createElement('i')); });
+  document.body.appendChild(barras);
+
+  // El orden de las historias es el del recorrido, no el del documento.
+  window.mostrarHistoria = function (i) {
+    var id = RECORRIDO[i];
+    modulos.forEach(function (m) {
+      var visible = m.id === id;
+      m.classList.toggle('viendo', visible);
+      if (visible) m.scrollTop = 0;
     });
-    riel.appendChild(p);
+    [].forEach.call(barras.children, function (b, j) {
+      b.className = j < i ? 'pasada' : (j === i ? 'actual' : '');
+    });
+  };
+
+  // Deslizar de costado pasa de módulo, como en una historia.
+  var desdeX = null, desdeY = null;
+  document.addEventListener('touchstart', function (e) {
+    desdeX = e.touches[0].clientX;
+    desdeY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (desdeX === null) return;
+    var dx = e.changedTouches[0].clientX - desdeX;
+    var dy = e.changedTouches[0].clientY - desdeY;
+    desdeX = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)) return;
+    if (e.target && e.target.closest && e.target.closest('.carrusel')) return;
+    irAPaso(paso + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  [].forEach.call(barras.children, function (b, j) {
+    b.addEventListener('click', function () { irAPaso(j); });
   });
-  document.body.appendChild(riel);
 
-  var puntos = [].slice.call(riel.children);
-  var mirando = new IntersectionObserver(function (entradas) {
-    entradas.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      puntos.forEach(function (p) { p.classList.toggle('activo', p.dataset.ir === e.target.id); });
-      var chip = document.querySelector('.chips button[data-ir="' + e.target.id + '"]');
-      if (chip) {
-        document.querySelectorAll('.chips button').forEach(function (b) { b.classList.remove('activo'); });
-        chip.classList.add('activo');
-        chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-      }
-    });
-  }, { threshold: 0.5 });
-
-  modulos.forEach(function (m) { mirando.observe(m); });
+  irAPaso(paso);
 })();
 
 // ---- Lo que no entra en pantalla se recorre de a páginas ----
