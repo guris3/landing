@@ -307,7 +307,6 @@ p { margin: 0 0 1em; color: var(--text-soft); }
   position: relative;
   display: flex;
   justify-content: center;
-  isolation: isolate;
 }
 
 /* Anillo de energía que gira detrás del logo. */
@@ -323,7 +322,7 @@ p { margin: 0 0 1em; color: var(--text-soft); }
   background: conic-gradient(from 0deg, transparent 0deg, var(--accent) 55deg, transparent 130deg, var(--accent-2) 210deg, transparent 260deg, var(--accent-3) 310deg, transparent 350deg);
   filter: blur(26px);
   opacity: 0.55;
-  z-index: -1;
+  z-index: 0;
   animation: girar 14s linear infinite;
 }
 
@@ -338,11 +337,13 @@ p { margin: 0 0 1em; color: var(--text-soft); }
   margin: calc(min(240px, 70%) / -2) 0 0 calc(min(240px, 70%) / -2);
   border: 1px solid var(--accent);
   border-radius: 50%;
-  z-index: -1;
+  z-index: 0;
   animation: onda 4s ease-out infinite;
 }
 
 .hero-logo img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
