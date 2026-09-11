@@ -1149,11 +1149,28 @@ html, body { height: 100%; overflow: hidden; }
     height: 3px;
     border-radius: 2px;
     background: var(--border);
+    overflow: hidden;
     cursor: pointer;
   }
 
-  .barras i.pasada { background: var(--accent); }
-  .barras i.actual { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .barras i span {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+
+  .barras i.pasada span { width: 100%; }
+
+  .barras i.actual span { animation: llenar var(--dura, 8s) linear forwards; }
+
+  .barras.pausa i.actual span { animation-play-state: paused; }
+
+  @keyframes llenar {
+    from { width: 0; }
+    to { width: 100%; }
+  }
 
   .recorrido {
     display: flex;

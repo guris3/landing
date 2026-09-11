@@ -485,7 +485,7 @@ tablero.addEventListener('pointermove', function (e) {
 });
 
 // ---- Recorrido: la rueda, las flechas y los botones llevan de un módulo al siguiente ----
-var RECORRIDO = ['inicio', 'servicios', 'proyectos', 'clientes', 'como-trabajamos', 'nosotros', 'contacto'];
+var RECORRIDO = ['inicio', 'servicios', 'clientes', 'proyectos', 'como-trabajamos', 'nosotros', 'contacto'];
 var paso = 0;
 var enfriando = false;
 
@@ -597,21 +597,66 @@ var pistaUso = document.getElementById('pista-uso');
 
   var barras = document.createElement('div');
   barras.className = 'barras';
-  modulos.forEach(function () { barras.appendChild(document.createElement('i')); });
+  modulos.forEach(function () {
+    var barra = document.createElement('i');
+    barra.appendChild(document.createElement('span'));
+    barras.appendChild(barra);
+  });
   document.body.appendChild(barras);
 
-  // El orden de las historias es el del recorrido, no el del documento.
+  // Cuánto dura cada historia: más texto, más tiempo, pero sin volverse eterna.
+  function duracion(m) {
+    var palabras = m.innerText.trim().split(/\s+/).length;
+    return Math.min(22, Math.max(6, 5 + Math.sqrt(palabras) * 0.9));
+  }
+
   window.mostrarHistoria = function (i) {
     var id = RECORRIDO[i];
+    var actual = null;
     modulos.forEach(function (m) {
       var visible = m.id === id;
       m.classList.toggle('viendo', visible);
-      if (visible) m.scrollTop = 0;
+      if (visible) { m.scrollTop = 0; actual = m; }
     });
+
     [].forEach.call(barras.children, function (b, j) {
       b.className = j < i ? 'pasada' : (j === i ? 'actual' : '');
     });
+
+    var barra = barras.children[i];
+    if (!barra || !actual) return;
+    var linea = barra.firstChild;
+    // Reinicia la animación de la línea desde cero.
+    linea.style.animation = 'none';
+    void linea.offsetWidth;
+    linea.style.animation = '';
+    barra.style.setProperty('--dura', duracion(actual).toFixed(1) + 's');
   };
+
+  // Al llenarse la línea, pasa sola a la historia siguiente.
+  barras.addEventListener('animationend', function (e) {
+    if (e.animationName !== 'llenar') return;
+    if (paso < RECORRIDO.length - 1) irAPaso(paso + 1);
+  });
+
+  // Mientras se toca la pantalla, la historia espera.
+  ['touchstart', 'pointerdown'].forEach(function (ev) {
+    document.addEventListener(ev, function () { barras.classList.add('pausa'); }, { passive: true });
+  });
+
+  ['touchend', 'touchcancel', 'pointerup'].forEach(function (ev) {
+    document.addEventListener(ev, function () { barras.classList.remove('pausa'); }, { passive: true });
+  });
+
+  // Si estás scrolleando la historia, el reloj espera a que termines.
+  var reanudar;
+  modulos.forEach(function (m) {
+    m.addEventListener('scroll', function () {
+      barras.classList.add('pausa');
+      clearTimeout(reanudar);
+      reanudar = setTimeout(function () { barras.classList.remove('pausa'); }, 2500);
+    }, { passive: true });
+  });
 
   // Deslizar de costado pasa de módulo, como en una historia.
   var desdeX = null, desdeY = null;
