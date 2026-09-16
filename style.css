@@ -41,3 +41,74 @@ h3{font-size:1.2rem}
 
 @media(max-width:900px){.wrap{width:min(100% - 32px,1120px)}.section{padding-block:68px}.hero{padding-block:58px}.featured{padding:25px}.contact{padding:58px 28px}}
 @media(max-width:560px){h1{font-size:clamp(2.5rem,12vw,3.8rem)}h2{font-size:clamp(1.8rem,9vw,2.65rem)}.section{padding-block:56px}.hero{padding-block:48px}.client{min-height:auto}}
+
+/* Ajustes visuales y movimiento ambiental. */
+.hero-copy{align-self:center}
+
+body{position:relative;overflow-x:hidden;isolation:isolate}
+body:before,body:after{content:"";position:fixed;z-index:0;width:34rem;aspect-ratio:1;border-radius:50%;pointer-events:none;filter:blur(9px);opacity:.5}
+body:before{top:24%;left:-24rem;background:radial-gradient(circle,rgba(57,230,189,.22),transparent 68%);animation:bg-drift-a 17s ease-in-out infinite alternate}
+body:after{right:-22rem;bottom:-8rem;background:radial-gradient(circle,rgba(49,140,255,.25),transparent 68%);animation:bg-drift-b 21s ease-in-out infinite alternate}
+main,footer{position:relative;z-index:1}
+main:before{content:"";position:absolute;z-index:-1;top:31%;right:-120px;width:360px;height:760px;opacity:.11;background:linear-gradient(90deg,transparent 49%,var(--mint) 50%,transparent 51%),linear-gradient(transparent 49%,var(--mint) 50%,transparent 51%);background-size:54px 54px;transform:rotate(-8deg);mask-image:linear-gradient(transparent,#000 25%,#000 75%,transparent);animation:bg-grid 18s linear infinite}
+main:after{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(circle,rgba(57,230,189,.7) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(49,140,255,.65) 0 1px,transparent 1.8px);background-position:0 0,110px 150px;background-size:230px 230px,310px 310px;mask-image:linear-gradient(transparent 2%,#000 12%,#000 90%,transparent);animation:bg-particles 34s linear infinite}
+@keyframes bg-drift-a{to{transform:translate(7rem,5rem) scale(1.15)}}
+@keyframes bg-drift-b{to{transform:translate(-8rem,-4rem) scale(.88)}}
+@keyframes bg-grid{to{background-position:54px 108px}}
+@keyframes bg-particles{to{background-position:230px 460px,-200px 770px}}
+
+.hero-copy{animation:hero-copy-in .8s cubic-bezier(.2,.75,.25,1) both}
+.hero-logo{animation:hero-mark-in 1s .12s cubic-bezier(.2,.75,.25,1) both}
+@keyframes hero-copy-in{from{opacity:0;transform:translateY(20px)}}
+@keyframes hero-mark-in{from{opacity:0;transform:translateY(18px) scale(.96)}}
+
+.btn{position:relative;overflow:hidden}
+.btn:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-45%;width:24%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);transform:skewX(-18deg);animation:button-shine 6s 1.5s ease-in-out infinite}
+.btn-ghost:after{opacity:.45}
+@keyframes button-shine{0%,70%,100%{left:-45%}82%{left:125%}}
+
+/* En la barra usamos sólo el isotipo del PNG completo, centrado dentro de un marco estable. */
+.brand-logo{position:relative;display:block;width:40px;height:40px;overflow:hidden;flex:0 0 40px}
+.brand-logo img{position:absolute;top:-21px;left:-26px;width:90px;max-width:none;height:auto}
+
+/* Los dos logos de clientes comparten el mismo marco y ocupan toda su superficie. */
+.client:nth-child(2) .client-logo{justify-content:center;height:94px;margin:-5px -5px 20px;padding:10px;overflow:hidden;border-radius:8px;background:#fff}
+.client:nth-child(2) .client-logo img{width:92%;height:92%;max-width:none;max-height:none;border-radius:6px;object-fit:contain;object-position:center}
+.centro-med-logo{justify-content:center;width:100%;height:94px!important;margin:-5px -5px 20px;padding:10px;border-radius:8px;background:#fff;text-align:center}
+.centro-med-logo span{color:var(--blue);font-size:1rem;font-weight:850;line-height:1.08;letter-spacing:-.025em}
+.almacenero-logo{gap:10px;width:100%;height:94px;margin:-5px -5px 20px;padding:14px;border-radius:8px;background:#f8f8f1;font-family:Arial,Helvetica,sans-serif}
+.almacenero-icon{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding-right:5px;border-radius:12px;background:#173e32;color:#deecb2;font-size:36px;font-weight:700;line-height:1;letter-spacing:-3px}
+.almacenero-icon i{position:absolute;top:1px;right:3px;color:#f0d9c7;font-size:16px;font-style:normal;letter-spacing:0}
+.almacenero-logo strong{color:#173e32;font-size:1.24rem;font-weight:800;letter-spacing:-.06em}
+.almacenero-logo strong span{color:#a45a34}
+
+.metrics{position:relative;grid-template-columns:repeat(3,1fr);overflow:hidden;background:rgba(13,16,21,.52);isolation:isolate}
+.metrics p{position:relative;z-index:2}
+.metrics strong{text-shadow:0 0 20px rgba(49,140,255,.24)}
+.metrics-circuit{position:absolute;z-index:3;inset:0;width:100%;height:100%;overflow:visible;opacity:.82;pointer-events:none}
+.metrics-circuit path{fill:none;vector-effect:non-scaling-stroke}
+.circuit-track{stroke:rgba(49,140,255,.16);stroke-width:1}
+.circuit-signal{stroke:var(--mint);stroke-width:2;stroke-linecap:round;stroke-dasharray:.028 .972;filter:drop-shadow(0 0 6px var(--mint));animation:circuit-run 5.5s linear infinite}
+@keyframes circuit-run{to{stroke-dashoffset:-1}}
+
+.reveal{transition-delay:var(--reveal-delay,0ms)}
+.metrics strong{animation:number-glow 4s ease-in-out infinite}
+.metrics p:nth-of-type(2) strong{animation-delay:.45s}
+.metrics p:nth-of-type(3) strong{animation-delay:.9s}
+@keyframes number-glow{0%,65%,100%{text-shadow:0 0 20px rgba(49,140,255,.24)}75%{text-shadow:0 0 9px rgba(57,230,189,.7),0 0 28px rgba(57,230,189,.3)}}
+
+@media(max-width:900px){.metrics{grid-template-columns:repeat(3,1fr)}.metrics p:nth-child(3){border-top:0;border-left:1px solid var(--line)}}
+@media(max-width:560px){.brand-logo{width:34px;height:34px;flex-basis:34px}.brand-logo img{top:-18px;left:-22px;width:77px}.metrics{grid-template-columns:1fr}.metrics p+p,.metrics p:nth-child(3){border-top:1px solid var(--line);border-left:0}.metrics-circuit{display:none}.metrics p{animation:metric-edge-glow 4.5s ease-in-out infinite}.metrics p:nth-of-type(2){animation-delay:1.5s}.metrics p:nth-of-type(3){animation-delay:3s}}
+@keyframes metric-edge-glow{0%,30%,100%{box-shadow:inset 0 0 0 0 transparent}12%{box-shadow:inset 0 0 0 1px var(--mint),inset 0 0 14px rgba(57,230,189,.08)}}
+
+/* En escritorio, el hero y las métricas completan juntos la primera pantalla. */
+@media(min-width:901px){
+  .hero{min-height:0;padding-block:clamp(48px,7vh,68px)}
+  .hero-logo{min-height:310px}
+}
+
+@media(min-width:561px) and (max-width:900px){
+  .hero{padding-block:36px}
+  .hero-logo{min-height:300px}
+  .hero-logo img{width:min(82%,310px)}
+}
