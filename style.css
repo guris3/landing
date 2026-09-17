@@ -162,3 +162,24 @@ html,body{width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip}
 .carousel-button:hover{transform:translateY(-2px);border-color:var(--mint);color:var(--mint)}
 @media(max-width:900px){.client-grid .client{flex-basis:calc((100% - 16px)/2)}}
 @media(max-width:560px){.client-grid .client{flex-basis:100%}.carousel-controls{justify-content:center}.carousel-controls span{margin-inline:auto}}
+
+/* En móvil, los clientes se muestran como una matriz desplegable en lugar de carrusel. */
+@media(max-width:560px){
+  .client-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px;overflow:visible;scroll-snap-type:none}
+  .client-grid .client{position:relative;display:block;min-width:0;min-height:0;padding:14px;cursor:pointer;scroll-snap-align:none}
+  .client-grid .client:after{content:"+";position:absolute;top:8px;right:10px;display:grid;place-items:center;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--blue);font-size:.9rem}
+  .client-grid .client.mobile-open{grid-column:1/-1;cursor:default;border-color:var(--blue)}
+  .client-grid .client.mobile-open:after{content:"−"}
+  .client-grid .client>.tag,.client-grid .client>h3,.client-grid .client>p,.client-grid .client>.text-link,.client-grid .client>.client-projects{display:none}
+  .client-grid .client.mobile-open>.tag{display:inline-block;margin-top:4px}
+  .client-grid .client.mobile-open>h3{display:block;margin-top:12px}
+  .client-grid .client.mobile-open>p{display:block}
+  .client-grid .client.mobile-open>.text-link{display:inline-block;margin-top:8px}
+  .client-grid .client>.client-logo{width:100%;height:82px!important;margin:0!important;padding:8px;justify-content:center;border-radius:8px}
+  .client-grid .client>.client-logo img{max-width:100%;max-height:66px}
+  .client-grid .centro-med-logo span{font-size:.82rem}
+  .client-grid .almacenero-logo{gap:6px}
+  .client-grid .almacenero-icon{width:34px;height:34px;font-size:29px}
+  .client-grid .almacenero-logo strong{font-size:.9rem}
+  .carousel-controls{display:none}
+}
