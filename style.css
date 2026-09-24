@@ -83,8 +83,7 @@ main:after{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;o
 .centro-med-logo{justify-content:center;width:100%;height:94px!important;margin:-5px -5px 20px;padding:10px;border-radius:8px;background:#fff;text-align:center}
 .centro-med-logo span{color:var(--blue);font-size:1rem;font-weight:850;line-height:1.08;letter-spacing:-.025em}
 .almacenero-logo{gap:10px;width:100%;height:94px;margin:-5px -5px 20px;padding:14px;border-radius:8px;background:#f8f8f1;font-family:Arial,Helvetica,sans-serif}
-.almacenero-icon{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding-right:5px;border-radius:12px;background:#173e32;color:#deecb2;font-size:36px;font-weight:700;line-height:1;letter-spacing:-3px}
-.almacenero-icon i{position:absolute;top:1px;right:3px;color:#f0d9c7;font-size:16px;font-style:normal;letter-spacing:0}
+.almacenero-icon{display:block;width:42px;height:42px;flex-shrink:0;object-fit:contain;border-radius:8px}
 .almacenero-logo strong{color:#173e32;font-size:1.24rem;font-weight:800;letter-spacing:-.06em}
 .almacenero-logo strong span{color:#a45a34}
 
@@ -146,6 +145,17 @@ html,body{width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip}
 @media(max-width:650px){.team-people{grid-template-columns:1fr 1fr;gap:14px}.person-pending{grid-column:1/-1;width:calc(50% - 7px);justify-self:center}}
 @media(max-width:430px){.team-people{grid-template-columns:1fr}.person-pending{grid-column:auto;width:100%}.person-photo{aspect-ratio:1/1.12}}
 
+/* Botones de clientes con contraste y un pulso espaciado. */
+#clientes .text-link{position:relative;align-self:flex-start;max-width:100%;min-height:44px;padding:11px 16px;border:1px solid var(--mint);border-radius:6px;background:var(--mint);color:#071c16;font-size:.84rem;line-height:1.5;text-align:center;animation:client-link-pulse 4.8s ease-in-out infinite;transition:background .2s,box-shadow .2s,transform .2s}
+#clientes .featured .text-link{display:inline-block}
+#clientes .client:nth-child(2n) .text-link{animation-delay:.8s}
+#clientes .client:nth-child(3n) .text-link{animation-delay:1.6s}
+#clientes .text-link:hover,#clientes .text-link:focus-visible{animation:none;background:#83f3d8;color:#071c16;transform:translateY(-2px);box-shadow:0 6px 20px rgba(57,230,189,.28)}
+#clientes .text-link:focus-visible{outline:2px solid var(--mint);outline-offset:4px}
+#clientes .text-link:active{transform:translateY(0);box-shadow:none}
+@keyframes client-link-pulse{0%,65%,100%{box-shadow:0 0 0 0 rgba(57,230,189,0)}75%{box-shadow:0 0 0 4px rgba(57,230,189,.18),0 0 18px rgba(57,230,189,.2)}85%{box-shadow:0 0 0 7px rgba(57,230,189,0)}}
+@media(prefers-reduced-motion:reduce){#clientes .text-link:hover,#clientes .text-link:focus-visible{transform:none}}
+
 /* Carrusel de clientes */
 .client-carousel{position:relative}
 .client-grid{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -179,7 +189,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip}
   .client-grid .client>.client-logo img{max-width:100%;max-height:66px}
   .client-grid .centro-med-logo span{font-size:.82rem}
   .client-grid .almacenero-logo{gap:6px}
-  .client-grid .almacenero-icon{width:34px;height:34px;font-size:29px}
+  .client-grid .almacenero-icon{width:34px;height:34px}
   .client-grid .almacenero-logo strong{font-size:.9rem}
   .carousel-controls{display:none}
 }
